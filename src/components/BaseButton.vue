@@ -5,13 +5,15 @@ button
 
 <style scoped>
 button {
-  width: 70px;
+  box-sizing: content-box;
+  width: 50px;
+  height: 50px;
   margin: 0;
   border: none;
-  border-radius: 10%;
   padding: 10px;
   background: inherit;
   font-family: inherit;
+  font-size: 24px;
   letter-spacing: inherit;
   cursor: pointer;
   transition: background 200ms ease-in-out;
