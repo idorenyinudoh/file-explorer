@@ -104,13 +104,19 @@ input {
 main {
   padding: calc(40px + 1vw) calc(30px + 1vw);
   display: grid;
-  row-gap: calc(10px + 1vw);
+  row-gap: calc(30px + 1vw);
 }
 header {
   display: grid;
   grid-template-columns: repeat(2, max-content);
   column-gap: calc(10px + 1vw);
   justify-content: flex-end;
+}
+#items {
+  display: flex;
+  flex-flow: wrap;
+  align-items: flex-start;
+  gap: calc(10px + 1vw);
 }
 p {
   margin: calc(50px + 1vw) 0 0 0;

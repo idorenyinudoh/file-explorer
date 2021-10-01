@@ -23,6 +23,9 @@ export default {
 <style scoped>
 span {
   display: block;
+  width: 50px;
   font-size: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>
