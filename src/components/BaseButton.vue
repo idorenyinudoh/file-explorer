@@ -6,8 +6,6 @@ button
 <style scoped>
 button {
   box-sizing: content-box;
-  width: 50px;
-  height: 50px;
   margin: 0;
   border: none;
   padding: 10px;
