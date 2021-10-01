@@ -2,8 +2,15 @@ import { createStore } from "vuex";
 
 export default createStore({
   state: {
-    files: [],
-    folders: {},
+    files: ["idk how to do this thing man", "i tried", "fr", "*ml"],
+    folders: {
+      bro: {
+        name: "bro",
+        url: "bro",
+        folders: {},
+        files: [],
+      },
+    },
   },
   mutations: {
     addFile(state, payload) {
