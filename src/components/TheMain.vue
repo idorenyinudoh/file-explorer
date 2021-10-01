@@ -1,19 +1,14 @@
 <template lang="pug">
-vue-final-modal(v-model="showFileModal" classes="modal-container" content-class="modal-content" focus-trap=true)
-  h2 Create New File
+vue-final-modal(v-model="showModal" classes="modal-container" content-class="modal-content" focus-trap=true)
+  h2 Create New {{ newItem }}
   form
-    input(type="text")
-    base-button(aria-label="submit" title="Submit") Submit
-vue-final-modal(v-model="showFolderModal" classes="modal-container" content-class="modal-content" focus-trap=true)
-  h2 Create New Folder
-  form
-    input(type="text")
+    input(type="text" required)
     base-button(aria-label="submit" title="Submit") Submit
 main
   header
-    base-button(aria-label="create new file" title="Create New File" class="icon" @click="openFileModal")
+    base-button(aria-label="create new file" title="Create New File" class="icon" @click="openModal('file')")
       img(src="../assets/add-file.png" alt="create file")
-    base-button(aria-label="create new folder" title="Create New Folder" class="icon" @click="openFolderModal")
+    base-button(aria-label="create new folder" title="Create New Folder" class="icon" @click="openModal('folder')")
       img(src="../assets/add-folder.png" alt="create folder")
   //- base-folder
   p You have no folders at the moment.
@@ -28,8 +23,8 @@ import { VueFinalModal } from "vue-final-modal";
 export default {
   data() {
     return {
-      showFileModal: false,
-      showFolderModal: false,
+      showModal: false,
+      newItem: "",
     };
   },
   components: {
@@ -38,11 +33,9 @@ export default {
     VueFinalModal,
   },
   methods: {
-    openFileModal() {
-      this.showFileModal = true;
-    },
-    openFolderModal() {
-      this.showFolderModal = true;
+    openModal(item) {
+      this.showModal = true;
+      item === "file" ? (this.newItem = "File") : (this.newItem = "Folder");
     },
   },
 };
