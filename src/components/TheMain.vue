@@ -14,7 +14,6 @@ main
     base-folder(v-for="folder in folders" :text="folder.name" :url="folder.url")
     base-file(v-for="file in files" :text="file")
   p(v-else) You have no folders at the moment.
-    
 </template>
 
 <script>
