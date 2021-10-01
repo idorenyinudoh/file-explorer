@@ -1,8 +1,8 @@
 <template lang="pug">
-vue-final-modal(v-model="showModal" classes="modal-container" content-class="modal-content" focus-trap=true)
+vue-final-modal(v-model="showModal" classes="modal-container" content-class="modal-content" focus-trap=true @opened="focus")
   h2 Create New {{ newItem }}
-  form
-    input(type="text" required)
+  form(@submit.prevent="createItem")
+    input(type="text" ref="input" required)
     base-button(aria-label="submit" title="Submit") Submit
 main
   header
@@ -10,8 +10,9 @@ main
       img(src="../assets/add-file.png" alt="create file")
     base-button(aria-label="create new folder" title="Create New Folder" class="icon" @click="openModal('folder')")
       img(src="../assets/add-folder.png" alt="create folder")
-  //- base-folder
-  p You have no folders at the moment.
+  #items(v-if="files.length || folders.length")
+    base-folder(v-for="folder in folders" :text="folder")
+  p(v-else) You have no folders at the moment.
     
 </template>
 
@@ -25,6 +26,8 @@ export default {
     return {
       showModal: false,
       newItem: "",
+      files: [],
+      folders: [],
     };
   },
   components: {
@@ -36,6 +39,19 @@ export default {
     openModal(item) {
       this.showModal = true;
       item === "file" ? (this.newItem = "File") : (this.newItem = "Folder");
+    },
+    focus() {
+      this.$refs.input.focus();
+    },
+    createItem() {
+      const inputValue = this.$refs.input.value;
+
+      this.newItem === "File"
+        ? this.files.push(inputValue)
+        : this.folders.push(inputValue);
+
+      this.$refs.input.value = "";
+      this.showModal = false;
     },
   },
 };
@@ -85,7 +101,7 @@ input {
 main {
   padding: calc(40px + 1vw) calc(30px + 1vw);
   display: grid;
-  row-gap: calc(50px + 1vw);
+  row-gap: calc(10px + 1vw);
 }
 header {
   display: grid;
@@ -94,7 +110,7 @@ header {
   justify-content: flex-end;
 }
 p {
-  margin: 0;
+  margin: calc(50px + 1vw) 0 0 0;
   font-size: 24px;
   text-align: center;
 }
