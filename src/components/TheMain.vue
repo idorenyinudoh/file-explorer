@@ -11,7 +11,7 @@ main
     base-button(aria-label="create new folder" title="Create New Folder" class="icon" @click="openModal('folder')")
       img(src="../assets/add-folder.png" alt="create folder")
   #items(v-if="files.length || folders.length")
-    base-folder(v-for="folder in folders" :text="folder" :url="folder.trim().toLowerCase().split(' ').join('-')")
+    base-folder(v-for="folder in folders" :text="folder.name" :url="folder.url")
     base-file(v-for="file in files" :text="file")
   p(v-else) You have no folders at the moment.
     
@@ -28,8 +28,6 @@ export default {
     return {
       showModal: false,
       newItem: "",
-      files: [],
-      folders: [],
     };
   },
   components: {
@@ -49,12 +47,31 @@ export default {
     createItem() {
       const inputValue = this.$refs.input.value;
 
-      this.newItem === "File"
-        ? this.files.push(inputValue)
-        : this.folders.push(inputValue);
+      if (this.newItem === "File") {
+        this.$store.commit({
+          type: "addFile",
+          fileName: inputValue,
+        });
+      } else {
+        this.$store.commit({
+          type: "addFolder",
+          name: inputValue,
+          url: inputValue.trim().toLowerCase().split(" ").join("-"),
+          folders: [],
+          files: [],
+        });
+      }
 
       this.$refs.input.value = "";
       this.showModal = false;
+    },
+  },
+  computed: {
+    files() {
+      return this.$store.state.files;
+    },
+    folders() {
+      return this.$store.state.folders;
     },
   },
 };
