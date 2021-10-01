@@ -12,14 +12,16 @@ main
       img(src="../assets/add-folder.png" alt="create folder")
   #items(v-if="files.length || folders.length")
     base-folder(v-for="folder in folders" :text="folder")
+    base-file(v-for="file in files" :text="file")
   p(v-else) You have no folders at the moment.
     
 </template>
 
 <script>
-import BaseFolder from "./BaseFolder.vue";
-import BaseButton from "./BaseButton.vue";
 import { VueFinalModal } from "vue-final-modal";
+import BaseButton from "./BaseButton.vue";
+import BaseFolder from "./BaseFolder.vue";
+import BaseFile from "./BaseFile.vue";
 
 export default {
   data() {
@@ -31,9 +33,10 @@ export default {
     };
   },
   components: {
-    BaseFolder,
-    BaseButton,
     VueFinalModal,
+    BaseButton,
+    BaseFolder,
+    BaseFile,
   },
   methods: {
     openModal(item) {

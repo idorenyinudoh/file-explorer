@@ -1,6 +1,6 @@
 <template lang="pug">
 base-button
-  img(src="../assets/folder.png" alt="folder icon")
+  img(src="../assets/file.png" alt="file icon")
   span {{ text }}
 </template>
 
