@@ -11,7 +11,7 @@ main
     base-button(aria-label="create new folder" title="Create New Folder" class="icon" @click="openModal('folder')")
       img(src="../assets/add-folder.png" alt="create folder")
   #items(v-if="files.length || folders.length")
-    base-folder(v-for="folder in folders" :text="folder")
+    base-folder(v-for="folder in folders" :text="folder" :url="folder.trim().toLowerCase().split(' ').join('-')")
     base-file(v-for="file in files" :text="file")
   p(v-else) You have no folders at the moment.
     
