@@ -10,7 +10,7 @@ main
       img(src="../assets/add-file.png" alt="create file")
     base-button(aria-label="create new folder" title="Create New Folder" class="icon" @click="openModal('folder')")
       img(src="../assets/add-folder.png" alt="create folder")
-  #items(v-if="files.length || folders.length")
+  #items(v-if="files.length || Object.keys(folders).length")
     base-folder(v-for="folder in folders" :text="folder.name" :url="folder.url")
     base-file(v-for="file in files" :text="file")
   p(v-else) You have no folders at the moment.
@@ -56,7 +56,7 @@ export default {
           type: "addFolder",
           name: inputValue,
           url: inputValue.trim().toLowerCase().split(" ").join("-"),
-          folders: [],
+          folders: {},
           files: [],
         });
       }
